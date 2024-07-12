@@ -1,16 +1,27 @@
-function employeeattendance(empcount){
-    const attendence=[];
+const PART_TIME_HOURS = 4;
+const FULL_TIME_HOURS = 8;
+const WAGE_PER_HOUR = 20;
 
-    for(let i=0;i<empcount;i++){
-        const isPresent=Math.random() <0.5 ;
-        attendence[i]=isPresent ? "present" : "absent";
+function calculateDailyWage() {
+    const attendance = Math.floor(Math.random() * 3); 
+
+    let hoursWorked;
+
+    switch (attendance) {
+        case 0: 
+            hoursWorked = 0;
+            break;
+        case 1: 
+            hoursWorked = PART_TIME_HOURS;
+            break;
+        case 2: 
+            hoursWorked = FULL_TIME_HOURS;
+            break;
     }
 
-    attendence.forEach((status,index)=>{
-        console.log(`Employee ${index +1} : ${status}`)
-
-    }
-    )
+    const dailyWage = hoursWorked * WAGE_PER_HOUR;
+    return dailyWage;
 }
 
-employeeattendance(5);
+const daily = calculateDailyWage();
+console.log(`Daily Wage: $${daily}`);
