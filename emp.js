@@ -1,7 +1,8 @@
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
-const WORKING_DAYS = 20;
+const MAX_HOURS = 160;
+const MAX_DAYS = 20;
 
 function getWorkHours(attendance) {
     switch (attendance) {
@@ -17,19 +18,16 @@ function getWorkHours(attendance) {
 }
 
 
-function calculateDailyWage() {
-    const attendance = Math.floor(Math.random() * 3); 
-    const hoursWorked = getWorkHours(attendance);
-    const dailyWage = hoursWorked * WAGE_PER_HOUR;
-    return dailyWage;
-}
-
-
 function calculateMonthlyWage() {
     let totalMonthlyWage = 0;
+    let totalHoursWorked = 0;
 
-    for (let day = 0; day < WORKING_DAYS; day++) {
-        totalMonthlyWage += calculateDailyWage();
+    for (let daysWorked = 0; daysWorked < MAX_DAYS && totalHoursWorked < MAX_HOURS; daysWorked++) {
+        const attendance = Math.floor(Math.random() * 3); 
+        const hoursWorked = getWorkHours(attendance);
+        totalHoursWorked += hoursWorked;
+        const dailyWage = hoursWorked * WAGE_PER_HOUR;
+        totalMonthlyWage += dailyWage;
     }
 
     return totalMonthlyWage;
@@ -37,3 +35,4 @@ function calculateMonthlyWage() {
 
 const monthlyWage = calculateMonthlyWage();
 console.log(`Monthly Wage: $${monthlyWage}`);
+
